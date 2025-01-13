@@ -66,13 +66,9 @@ Once the data is loaded into the Data Warehouse, you can use SQL queries or Pyth
 
 ## 4. Example Query:
 ```bash
-
   SELECT product_id, SUM(quantity) AS total_sales
-  
   FROM dw.invoices_fact
-  
   GROUP BY product_id
-  
   ORDER BY total_sales DESC;
 ```  
 This query gives you the total sales per product from the Data Warehouse.
@@ -82,5 +78,6 @@ If you have any questions or need assistance, feel free to contact me:
 
 Email: alhayekahmed045@gmail.com
 Phone: +20 597967157
-License
+
+## License
 This project is open-source and available under the MIT License.
