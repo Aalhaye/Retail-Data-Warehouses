@@ -49,8 +49,11 @@ Create the necessary tables (fact and dimension tables) as per the project's sch
 6. Run the application:
 After installing the dependencies and setting up the database, run the main Python script:
 
+```bash
 
 python final.py
+```
+
 This script will extract data from the raw tables, clean and process it, and then load it into the Data Warehouse for analysis.
 
 ### Usage
