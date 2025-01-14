@@ -18,7 +18,7 @@ def check_table_exists(cursor, table_name):
 def load_data_to_postgres(filepath, table_name):
 
     try:
-        # الاتصال بقاعدة البيانات
+        # Connecting to the database
         conn = psycopg2.connect(
             dbname="project_DB", 
             user="postgres", 
@@ -28,30 +28,30 @@ def load_data_to_postgres(filepath, table_name):
         )
 
 
-        # إنشاء كائن cursor
+        # Creating a cursor object
         cursor = conn.cursor()
 
-        # التحقق من وجود الجدول في قاعدة البيانات
+        # Checking that the table exists in the database
         if not check_table_exists(cursor, table_name):
             print(f"Error: The table '{table_name}' does not exist in 'raw_tables' schema.")
             return
 
-        # قراءة البيانات من الملف CSV
+        # Reading data from a CSV file
         data = pd.read_csv(filepath)
         columns = list(data.columns)
 
-        # بناء استعلام INSERT مع placeholder
+        # Building an INSERT query with placeholder
         insert_query = sql.SQL("INSERT INTO raw_tables.{} ({}) VALUES ({})").format(
             sql.Identifier(table_name),  # تخصيص اسم الجدول
-            sql.SQL(', ').join(map(sql.Identifier, columns)),  # تخصيص الأعمدة
-            sql.SQL(', ').join([sql.Placeholder()] * len(columns))  # تخصيص القيم
+            sql.SQL(', ').join(map(sql.Identifier, columns)),  # Customize columns
+            sql.SQL(', ').join([sql.Placeholder()] * len(columns))  # Customize values
         )
 
-        # إدخال البيانات إلى قاعدة البيانات
+        # Entering data into the database
         for row in data.itertuples(index=False, name=None):
             cursor.execute(insert_query, row)
 
-        # تأكيد التغييرات في قاعدة البيانات
+        #  Confirming changes in the database
         conn.commit()
 
         print("Data loaded successfully!")
