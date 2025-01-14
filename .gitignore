@@ -13,7 +13,7 @@ __pycache__/
 
 # Database configurations (Should not be tracked by git for security)
 config/db_config.json
-config/api_config.json
+
 
 # Raw data directory (You may not want to track raw data files)
 data/raw/
